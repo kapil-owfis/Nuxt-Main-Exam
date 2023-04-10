@@ -81,7 +81,7 @@
                 </div>
                 <div
                   class="-ml-px flex w-0 flex-1 cursor-pointer"
-                  @click="deleteCandidate(candidate)"
+                  @click="deleteselectedCandidate(candidate)"
                 >
                   <a
                     class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
@@ -191,7 +191,7 @@
       />
       <!-- edit modal ends here -->
       <!-- delte modal -->
-        <CollectionDelete  v-if="isDeleting"/>
+        <CollectionDelete  v-if="isDeleting" :selectedCandidate="selectedCandidate" @deleteCandidate="deleteCandidate"/>
       <!-- delte modal -->
     </div>
     <!-- and and edit slide bar ends here -->
@@ -246,6 +246,12 @@ const updateselectedCandidate = (candidate: any) => {
 };
 // set selected candidate  to selectedCandidate starts here
 
+const deleteselectedCandidate = (candidate: any) => {
+  selectedCandidate.value = candidate;
+  isDeleting.value = true;
+};
+
+
 //getting  candidate details starts here
 const getCandidateDetails = async () => {
   let data: any = localStorage.getItem("candidateDetails");
@@ -282,8 +288,8 @@ const updateDetails = async (candidate: any) => {
 //updating candidate details ends  here
 
 //delete candidate starts here
-const deleteCandidate = async (candidate: any) => { 
-    isDeleting.value=true       
+const deleteCandidate = async (candidate: any) => {   
+  isDeleting.value=false     
   //to get the index of candidate
   indexOfSelected = getIndexOfSelected(candidate.id);
   candidatesList.value.splice(indexOfSelected, 1);
