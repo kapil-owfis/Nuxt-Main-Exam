@@ -34,7 +34,7 @@
                           @click="open = false"
                         >
                           <XMarkIcon
-                            @click="emtis('closeModal', 'edit')"
+                            @click="emits('closeModal', 'edit')"
                             class="h-6 w-6"
                             aria-hidden="true"
                           />
@@ -106,11 +106,31 @@
                     <!-- candidte date of birth ends here-->
                   </div>
                   <!-- update candidate details ends here -->
+
+
+                  <!-- candidate gender starts here -->
+                  <div class="mt-2 mb-3">
+                      <label
+                        for="dateOfBirth"
+                        class="text-base font-semibold leading-6 text-gray-900"
+                        >Gender</label
+                      >
+                      <select
+                        v-model="candidate.gender"
+                        id="type"
+                        class="block w-full mt-2 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      >
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                    </div>
+
+                  <!-- candidate gender ends here -->
                   <!-- update and cancel  buttons starts here -->
                   <div class="mt-5 flex justify-between">
                     <button
                       type="button"
-                      @click="emtis('closeModal','edit')"
+                      @click="emits('closeModal','edit')"
                       class="inline-flex w-full mr-3 justify-center rounded-md bg-slate-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       Cancel
@@ -148,7 +168,7 @@ import { XMarkIcon } from "@heroicons/vue/24/outline";
 const open = ref(true);
 
 //defining emits
-const emtis = defineEmits(["updateDetails", "closeModal"]);
+const emits = defineEmits(["updateDetails", "closeModal"]);
 
 //candidate details props schema starts here
 interface UpdateCandidateSchema {
@@ -156,6 +176,7 @@ interface UpdateCandidateSchema {
     name: string;
     age: string;
     dob:string,
+    gender:string,
     id:number
   };
 }
@@ -169,11 +190,12 @@ const candidate = ref({
   name: props.selectedCandidate.name,
   age:props.selectedCandidate.age,
   dob: props.selectedCandidate.dob,
+  gender:props.selectedCandidate.gender,
   id:props.selectedCandidate.id
 });
 
 //emitting the builder details
 const updateDetails = () => {
-  emtis("updateDetails", candidate.value);
+    emits("updateDetails", candidate.value);
 };
 </script>

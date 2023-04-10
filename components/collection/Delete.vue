@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :show="open">
-    <Dialog as="div" class="relative z-10" @close="open = false">
+    <Dialog as="div" class="relative z-10">
       <TransitionChild
         as="template"
         enter="ease-out duration-300"
@@ -31,6 +31,9 @@
             <DialogPanel
               class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6"
             >
+            <button class="h-5 w-5 cursor-pointer" @click="emits('closeModal','delete')">
+              <TrashIcon  />
+            </button>
               <div>
                 <div
                   class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100"
@@ -85,6 +88,7 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import { CheckIcon } from "@heroicons/vue/24/outline";
+import { TrashIcon } from "@heroicons/vue/20/solid";
 
 const open = ref(true);
 const emits = defineEmits(["deleteCandidate", "closeModal"]);

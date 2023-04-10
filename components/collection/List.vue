@@ -136,6 +136,7 @@
         v-if="isDeleting"
         :selectedCandidate="selectedCandidate"
         @deleteCandidate="deleteCandidate"
+        @closeModal="closeModal"
       />
       <!-- delte modal -->
     </div>
@@ -151,6 +152,7 @@
       </div>
     </div>
     <!-- No Candidate details ends here -->
+   
   </div>
 </template>
       
@@ -248,7 +250,7 @@ const deleteCandidate = async (candidate: any) => {
 //closing add or edit modal
 const closeModal = (value: any) => {
   if (value == "edit") isEditing.value = false;
-  else if (value == "delete") isDeleting.value = false;
+  if (value == "delete") isDeleting.value = false;
   isAdding.value = false;
 };
 
